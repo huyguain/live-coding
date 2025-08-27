@@ -120,3 +120,28 @@ npm list @reduxjs/toolkit react-redux axios @tanstack/react-query
 ```
 
 **Kết quả mong đợi:** Tất cả packages được cài đặt thành công với version mới nhất
+
+### Bước 7: Tạo Types và Mock Data
+Đã tạo cấu trúc thư mục và files cần thiết:
+
+```bash
+# Tạo thư mục
+mkdir -p src/types src/utils src/data
+
+# Kiểm tra cấu trúc
+tree src/ -I node_modules
+```
+
+**Files đã tạo:**
+- `src/types/event.ts` - TypeScript interfaces cho Event, filters, sorting, pagination
+- `src/types/index.ts` - Export tất cả types
+- `src/utils/constants.ts` - Constants cho cities, categories, price ranges, sort options
+- `src/data/mockEvents.ts` - Mock data với 10 events mẫu (Việt Nam)
+
+**Types chính:**
+- `Event` - Interface chính cho sự kiện
+- `EventCategory` - Các loại sự kiện (music, sports, technology, etc.)
+- `EventFilters` - Filters cho search, category, city, price, date
+- `EventSort` - Sorting theo field và direction
+- `PaginationState` - Trạng thái pagination
+- `EventListState` - State tổng hợp cho Redux store
