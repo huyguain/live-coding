@@ -145,3 +145,37 @@ tree src/ -I node_modules
 - `EventSort` - Sorting theo field và direction
 - `PaginationState` - Trạng thái pagination
 - `EventListState` - State tổng hợp cho Redux store
+
+### Bước 8: Setup Redux Store
+Đã tạo Redux store với Redux Toolkit:
+
+```bash
+# Tạo thư mục store và hooks
+mkdir -p src/store src/hooks
+```
+
+**Files đã tạo:**
+- `src/store/eventSlice.ts` - Redux slice với actions cho filters, sorting, pagination
+- `src/store/index.ts` - Root store configuration
+- `src/store/hooks.ts` - Typed hooks cho Redux
+- `src/components/Providers.tsx` - Redux Provider + React Query Provider
+- `src/hooks/useEvents.ts` - Custom hook để sử dụng event state và actions
+- `src/hooks/useDebounce.ts` - Hook debounce cho search
+
+**Actions chính:**
+- `setSearchFilter` - Cập nhật search term
+- `setCategoryFilter` - Lọc theo category
+- `setCityFilter` - Lọc theo thành phố
+- `setPriceRangeFilter` - Lọc theo khoảng giá
+- `setDateRangeFilter` - Lọc theo khoảng ngày
+- `setSort` - Sắp xếp theo field và direction
+- `setCurrentPage/setPageSize` - Pagination
+- `resetFilters` - Reset tất cả filters
+- `applyFilters` - Áp dụng filters và cập nhật filtered events
+
+**Features:**
+- Auto-apply filters khi filters/sort thay đổi
+- Pagination tự động tính toán
+- Search với debounce support
+- Type-safe với TypeScript
+- Tích hợp React Query cho data fetching
