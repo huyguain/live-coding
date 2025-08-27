@@ -179,3 +179,33 @@ mkdir -p src/store src/hooks
 - Search với debounce support
 - Type-safe với TypeScript
 - Tích hợp React Query cho data fetching
+
+### Bước 9: Implement UI Components
+Đã tạo các UI components chính:
+
+```bash
+# Tạo cấu trúc thư mục components
+mkdir -p src/components/EventList src/components/SearchBar src/components/FilterPanel src/components/SortControl src/components/Pagination
+```
+
+**Components đã tạo:**
+- `src/components/SearchBar/SearchBar.tsx` - Search bar với debounce 300ms
+- `src/components/FilterPanel/FilterPanel.tsx` - Panel filters (category, city, price range)
+- `src/components/SortControl/SortControl.tsx` - Dropdown sorting (date, price, title)
+- `src/components/EventList/EventCard.tsx` - Card hiển thị thông tin sự kiện
+- `src/components/EventList/EventList.tsx` - List events với loading/empty states
+- `src/app/page.tsx` - Main page layout với tất cả components
+
+**Features UI:**
+- **SearchBar:** Debounced search với clear button và search icon
+- **FilterPanel:** Category, city, price range filters với active filters display
+- **SortControl:** Dropdown sorting với 6 options (date asc/desc, price asc/desc, title asc/desc)
+- **EventCard:** Card đẹp với image placeholder, badges, price formatting, date formatting
+- **EventList:** Grid responsive, loading spinner, error state, empty state
+- **Responsive:** Mobile-first design với Tailwind CSS
+
+**Layout:**
+- Header với title và description
+- Search bar và sort controls
+- Sidebar filters + main content grid
+- Responsive design (mobile, tablet, desktop)
