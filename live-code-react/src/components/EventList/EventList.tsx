@@ -3,7 +3,7 @@
 import React from 'react';
 import { useEvents } from '@/hooks/useEvents';
 import { EventCard } from './EventCard';
-import { Pagination } from '@/components/Pagination';
+import { PaginationContainer } from '@/components/Pagination';
 
 interface EventListProps {
   className?: string;
@@ -81,7 +81,7 @@ export function EventList({ className = '' }: EventListProps) {
 
       {/* Pagination */}
       <div className="mt-8">
-        <Pagination />
+        <PaginationContainer />
       </div>
     </div>
   );

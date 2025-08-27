@@ -8,7 +8,7 @@ interface PaginationProps {
 }
 
 export function Pagination({ className = '' }: PaginationProps) {
-  const { pagination, totalPages, setCurrentPage } = useEvents();
+  const { pagination, totalPages, setCurrentPage, setPageSize } = useEvents();
 
   if (totalPages <= 1) {
     return null;
@@ -44,8 +44,40 @@ export function Pagination({ className = '' }: PaginationProps) {
 
   const pageNumbers = getPageNumbers();
 
+  const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newPageSize = parseInt(e.target.value);
+    setPageSize(newPageSize);
+  };
+
+  const startItem = (pagination.currentPage - 1) * pagination.pageSize + 1;
+  const endItem = Math.min(pagination.currentPage * pagination.pageSize, pagination.totalItems);
+
   return (
-    <div className={`flex items-center justify-center space-x-2 ${className}`}>
+    <div className={`space-y-4 ${className}`}>
+      {/* Pagination Info and Page Size */}
+      <div className="flex items-center justify-between">
+        <div className="text-sm text-gray-600">
+          Hiển thị {startItem}-{endItem} trong tổng số {pagination.totalItems} sự kiện
+        </div>
+        
+        <div className="flex items-center space-x-2">
+          <span className="text-sm text-gray-600">Hiển thị:</span>
+          <select
+            value={pagination.pageSize}
+            onChange={handlePageSizeChange}
+            className="px-2 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value={10}>10</option>
+            <option value={20}>20</option>
+            <option value={50}>50</option>
+            <option value={100}>100</option>
+          </select>
+          <span className="text-sm text-gray-600">sự kiện/trang</span>
+        </div>
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="flex items-center justify-center space-x-2">
       {/* Previous Button */}
       <button
         onClick={() => handlePageChange(pagination.currentPage - 1)}
@@ -108,6 +140,7 @@ export function Pagination({ className = '' }: PaginationProps) {
       >
         Sau
       </button>
+      </div>
     </div>
   );
 }

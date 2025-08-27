@@ -334,3 +334,47 @@ mkdir -p src/components/EventList src/components/SearchBar src/components/Filter
 - **Smooth Transitions** - CSS transitions cho interactions
 - **Visual Feedback** - Hover states và active indicators
 - **Accessibility** - Proper labels và keyboard navigation
+
+### Bước 14: Implement Pagination hoặc Infinite Scroll
+Đã implement pagination hoàn chỉnh với cả hai modes:
+
+**Components đã tạo:**
+- `src/components/Pagination/Pagination.tsx` - Pagination với page size selector và info
+- `src/components/Pagination/InfiniteScroll.tsx` - Infinite scroll với Intersection Observer
+- `src/components/Pagination/PaginationToggle.tsx` - Toggle giữa pagination và infinite scroll
+- `src/components/Pagination/PaginationContainer.tsx` - Container quản lý cả hai modes
+- `src/hooks/useInfiniteScroll.ts` - Hook quản lý infinite scroll state
+
+**Features Pagination:**
+- **Page Navigation** - Prev/next, first/last, page numbers
+- **Page Size Selector** - 10, 20, 50, 100 items per page
+- **Pagination Info** - Hiển thị range và tổng số items
+- **Smart Page Numbers** - Ellipsis cho nhiều pages
+- **Responsive Design** - Mobile-friendly pagination
+
+**Features Infinite Scroll:**
+- **Intersection Observer** - Auto-load khi scroll đến cuối
+- **Progress Bar** - Visual progress của việc tải
+- **Loading Indicator** - Spinner khi đang tải thêm
+- **End of Content** - Thông báo khi tải xong tất cả
+- **Performance Optimized** - Efficient scroll detection
+
+**Features Pagination Toggle:**
+- **Mode Switching** - Toggle giữa pagination và infinite scroll
+- **Visual Indicators** - Icons và labels cho từng mode
+- **Auto Reset** - Reset về trang 1 khi switch mode
+- **Mode Info** - Tooltip giải thích từng mode
+
+**Pagination Flow:**
+1. User chọn page size hoặc mode
+2. Components update pagination state
+3. Redux recalculate paginated events
+4. Components re-render với data mới
+5. Pagination controls update theo state
+
+**Infinite Scroll Flow:**
+1. User scroll đến cuối danh sách
+2. Intersection Observer detect
+3. Auto-load thêm events
+4. Progress bar update
+5. Loading indicator hiển thị
