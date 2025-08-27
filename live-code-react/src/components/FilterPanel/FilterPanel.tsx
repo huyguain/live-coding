@@ -33,6 +33,13 @@ export function FilterPanel({ className = '' }: FilterPanelProps) {
     return currentRange?.label || 'Tất cả';
   };
 
+  // Check if any filters are active
+  const hasActiveFilters = 
+    filters.category !== 'all' || 
+    filters.city || 
+    filters.priceRange.min > 0 || 
+    filters.priceRange.max < 999999999;
+
   return (
     <div className={`bg-white p-6 rounded-lg shadow-sm border border-gray-200 ${className}`}>
       <div className="flex items-center justify-between mb-4">
@@ -104,7 +111,7 @@ export function FilterPanel({ className = '' }: FilterPanelProps) {
         </div>
 
         {/* Active Filters Summary */}
-        {(filters.category !== 'all' || filters.city || filters.priceRange.min > 0 || filters.priceRange.max < 999999999) && (
+        {hasActiveFilters && (
           <div className="pt-4 border-t border-gray-200">
             <h4 className="text-sm font-medium text-gray-700 mb-2">Bộ lọc đang áp dụng:</h4>
             <div className="flex flex-wrap gap-2">

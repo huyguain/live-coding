@@ -3,6 +3,7 @@
 import React from 'react';
 import { useEvents } from '@/hooks/useEvents';
 import { EventCard } from './EventCard';
+import { Pagination } from '@/components/Pagination';
 
 interface EventListProps {
   className?: string;
@@ -65,6 +66,9 @@ export function EventList({ className = '' }: EventListProps) {
       <div className="mb-6">
         <p className="text-sm text-gray-600">
           Hiển thị {filteredEvents.length} trong tổng số {pagination.totalItems} sự kiện
+          {pagination.totalItems > pagination.pageSize && (
+            <span> (Trang {pagination.currentPage} / {Math.ceil(pagination.totalItems / pagination.pageSize)})</span>
+          )}
         </p>
       </div>
 
@@ -73,6 +77,11 @@ export function EventList({ className = '' }: EventListProps) {
         {filteredEvents.map((event) => (
           <EventCard key={event.id} event={event} />
         ))}
+      </div>
+
+      {/* Pagination */}
+      <div className="mt-8">
+        <Pagination />
       </div>
     </div>
   );

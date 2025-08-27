@@ -21,6 +21,11 @@ export function SearchBar({ placeholder = 'Tìm kiếm sự kiện...', classNam
     setSearch(debouncedSearchValue);
   }, [debouncedSearchValue, setSearch]);
 
+  // Sync local state with Redux state when filters change
+  useEffect(() => {
+    setSearchValue(filters.search);
+  }, [filters.search]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };

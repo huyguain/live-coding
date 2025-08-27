@@ -4,6 +4,7 @@ import { SearchBar } from '@/components/SearchBar';
 import { FilterPanel } from '@/components/FilterPanel';
 import { SortControl } from '@/components/SortControl';
 import { EventList } from '@/components/EventList';
+import { ReduxDevTools } from '@/components/ReduxDevTools';
 
 export default function Home() {
   return (
@@ -40,6 +41,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Redux DevTools (Development only) */}
+      <ReduxDevTools />
     </div>
   );
 }

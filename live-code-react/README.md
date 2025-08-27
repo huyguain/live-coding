@@ -209,3 +209,27 @@ mkdir -p src/components/EventList src/components/SearchBar src/components/Filter
 - Search bar và sort controls
 - Sidebar filters + main content grid
 - Responsive design (mobile, tablet, desktop)
+
+### Bước 10: Tích hợp Redux Store
+Đã tích hợp Redux store vào tất cả components:
+
+**Components đã cập nhật:**
+- `src/components/SearchBar/SearchBar.tsx` - Sync local state với Redux state
+- `src/components/FilterPanel/FilterPanel.tsx` - Hiển thị active filters
+- `src/components/EventList/EventList.tsx` - Hiển thị pagination info và thêm Pagination component
+- `src/components/Pagination/Pagination.tsx` - Pagination component với Redux integration
+- `src/components/ReduxDevTools.tsx` - DevTools để debug Redux state
+
+**Features đã tích hợp:**
+- **State Synchronization:** SearchBar sync local state với Redux
+- **Active Filters Display:** FilterPanel hiển thị filters đang active
+- **Pagination:** Full pagination với page numbers, prev/next buttons
+- **Redux DevTools:** Debug panel để xem Redux state (development only)
+- **Real-time Updates:** Tất cả components update real-time khi Redux state thay đổi
+
+**Redux Flow:**
+1. User tương tác với UI (search, filter, sort, pagination)
+2. Components dispatch actions đến Redux store
+3. Redux slice update state và apply filters
+4. Components re-render với data mới
+5. Pagination tự động tính toán và update
