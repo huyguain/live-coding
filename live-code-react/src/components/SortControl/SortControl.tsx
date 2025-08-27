@@ -25,6 +25,13 @@ export function SortControl({ className = '' }: SortControlProps) {
     return `${sort.field}-${sort.direction}`;
   };
 
+  const getSortIcon = (field: string, direction: string) => {
+    if (sort.field === field) {
+      return direction === 'asc' ? '↑' : '↓';
+    }
+    return '';
+  };
+
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
       <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
@@ -37,10 +44,21 @@ export function SortControl({ className = '' }: SortControlProps) {
       >
         {SORT_OPTIONS.map((option) => (
           <option key={option.value} value={option.value}>
-            {option.label}
+            {option.label} {getSortIcon(option.field, option.direction)}
           </option>
         ))}
       </select>
+      
+      {/* Current Sort Indicator */}
+      <div className="flex items-center space-x-1 text-sm text-gray-500">
+        <span>Hiện tại:</span>
+        <span className="font-medium text-blue-600">
+          {SORT_OPTIONS.find(opt => opt.value === getCurrentSortValue())?.label}
+        </span>
+        <span className="text-blue-600">
+          {getSortIcon(sort.field, sort.direction)}
+        </span>
+      </div>
     </div>
   );
 }

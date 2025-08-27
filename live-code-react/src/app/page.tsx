@@ -1,7 +1,7 @@
 'use client';
 
 import { SearchBar } from '@/components/SearchBar';
-import { FilterPanel } from '@/components/FilterPanel';
+import { FilterPanel, FilterChips } from '@/components/FilterPanel';
 import { SortControl } from '@/components/SortControl';
 import { EventList } from '@/components/EventList';
 import { ReduxDevTools } from '@/components/ReduxDevTools';
@@ -26,6 +26,9 @@ export default function Home() {
           <div className="flex justify-between items-center">
             <SortControl />
           </div>
+          
+          {/* Active Filters */}
+          <FilterChips />
         </div>
 
         {/* Main Content */}

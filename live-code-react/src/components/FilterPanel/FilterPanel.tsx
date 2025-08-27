@@ -3,13 +3,14 @@
 import React from 'react';
 import { useEvents } from '@/hooks/useEvents';
 import { CATEGORIES, CITIES, PRICE_RANGES } from '@/utils/constants';
+import { FilterChips } from './FilterChips';
 
 interface FilterPanelProps {
   className?: string;
 }
 
 export function FilterPanel({ className = '' }: FilterPanelProps) {
-  const { filters, setCategory, setCity, setPriceRange, resetFilters } = useEvents();
+  const { filters, setCategory, setCity, setPriceRange, setDateRange, resetFilters } = useEvents();
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value as any);
@@ -26,6 +27,13 @@ export function FilterPanel({ className = '' }: FilterPanelProps) {
     }
   };
 
+  const handleDateRangeChange = (field: 'from' | 'to') => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDateRange({
+      ...filters.dateRange,
+      [field]: e.target.value
+    });
+  };
+
   const getCurrentPriceRangeLabel = () => {
     const currentRange = PRICE_RANGES.find(
       range => range.min === filters.priceRange.min && range.max === filters.priceRange.max
@@ -38,7 +46,9 @@ export function FilterPanel({ className = '' }: FilterPanelProps) {
     filters.category !== 'all' || 
     filters.city || 
     filters.priceRange.min > 0 || 
-    filters.priceRange.max < 999999999;
+    filters.priceRange.max < 999999999 ||
+    filters.dateRange.from ||
+    filters.dateRange.to;
 
   return (
     <div className={`bg-white p-6 rounded-lg shadow-sm border border-gray-200 ${className}`}>
@@ -110,27 +120,38 @@ export function FilterPanel({ className = '' }: FilterPanelProps) {
           </select>
         </div>
 
+        {/* Date Range Filter */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Khoảng ngày
+          </label>
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">Từ ngày</label>
+              <input
+                type="date"
+                value={filters.dateRange.from}
+                onChange={handleDateRangeChange('from')}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">Đến ngày</label>
+              <input
+                type="date"
+                value={filters.dateRange.to}
+                onChange={handleDateRangeChange('to')}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Active Filters Summary */}
         {hasActiveFilters && (
           <div className="pt-4 border-t border-gray-200">
             <h4 className="text-sm font-medium text-gray-700 mb-2">Bộ lọc đang áp dụng:</h4>
-            <div className="flex flex-wrap gap-2">
-              {filters.category !== 'all' && (
-                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
-                  {CATEGORIES.find(c => c.value === filters.category)?.label}
-                </span>
-              )}
-              {filters.city && (
-                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-800">
-                  {filters.city}
-                </span>
-              )}
-              {getCurrentPriceRangeLabel() !== 'Tất cả' && (
-                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-yellow-100 text-yellow-800">
-                  {getCurrentPriceRangeLabel()}
-                </span>
-              )}
-            </div>
+            <FilterChips />
           </div>
         )}
       </div>

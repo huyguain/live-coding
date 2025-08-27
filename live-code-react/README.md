@@ -260,3 +260,35 @@ mkdir -p src/components/EventList src/components/SearchBar src/components/Filter
 4. Redux filter events và update state
 5. Components re-render với filtered results
 6. Search term được lưu vào history
+
+### Bước 12: Basic Filtering và Sorting
+Đã implement filtering và sorting hoàn chỉnh với các tính năng nâng cao:
+
+**Components đã tạo/cập nhật:**
+- `src/components/FilterPanel/FilterPanel.tsx` - Panel filters với date range
+- `src/components/FilterPanel/FilterChips.tsx` - Removable filter chips
+- `src/components/SortControl/SortControl.tsx` - Sort control với visual indicators
+- `src/hooks/useFilterState.ts` - Hook quản lý filter state với localStorage
+
+**Features Filtering:**
+- **Category Filter** - Lọc theo danh mục sự kiện
+- **City Filter** - Lọc theo thành phố
+- **Price Range Filter** - Lọc theo khoảng giá (5 ranges)
+- **Date Range Filter** - Lọc theo khoảng ngày (from/to)
+- **Filter Chips** - Hiển thị active filters với remove buttons
+- **Filter Persistence** - Lưu filter state vào localStorage
+- **Reset All Filters** - Button xóa tất cả filters
+
+**Features Sorting:**
+- **6 Sort Options** - Date asc/desc, Price asc/desc, Title asc/desc
+- **Visual Indicators** - Arrow icons cho sort direction
+- **Current Sort Display** - Hiển thị sort option hiện tại
+- **Real-time Updates** - Sort ngay lập tức khi thay đổi
+
+**Filter Flow:**
+1. User chọn filters từ FilterPanel
+2. Filters được update trong Redux state
+3. Redux apply filters và sort events
+4. FilterChips hiển thị active filters
+5. EventList re-render với filtered results
+6. Filter state được lưu vào localStorage
