@@ -233,3 +233,30 @@ mkdir -p src/components/EventList src/components/SearchBar src/components/Filter
 3. Redux slice update state và apply filters
 4. Components re-render với data mới
 5. Pagination tự động tính toán và update
+
+### Bước 11: Implement Search với Debounce
+Đã implement search hoàn chỉnh với debounce và các tính năng nâng cao:
+
+**Components đã tạo/cập nhật:**
+- `src/hooks/useDebounce.ts` - Hook debounce với loading state
+- `src/hooks/useSearchHistory.ts` - Hook quản lý search history với localStorage
+- `src/components/SearchBar/SearchBar.tsx` - Search bar với debounce, keyboard shortcuts
+- `src/components/SearchBar/SearchResults.tsx` - Search suggestions và results
+- `src/components/SearchBar/index.ts` - Export components
+
+**Features Search:**
+- **Debounce 300ms** - Tránh spam API calls
+- **Loading Indicator** - Spinner khi đang debouncing
+- **Keyboard Shortcuts** - Ctrl/Cmd+K focus, Esc clear
+- **Search Suggestions** - Hiển thị events và categories matching
+- **Search History** - Lưu 10 search terms gần nhất
+- **Click Outside** - Tự động đóng search results
+- **Real-time Results** - Update Redux state và filter events
+
+**Search Flow:**
+1. User gõ vào search input
+2. Loading spinner hiển thị (debouncing)
+3. Sau 300ms, search term được gửi đến Redux
+4. Redux filter events và update state
+5. Components re-render với filtered results
+6. Search term được lưu vào history
