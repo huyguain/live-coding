@@ -4,6 +4,7 @@ import React from 'react';
 import { useEvents } from '@/hooks/useEvents';
 import { EventCard } from './EventCard';
 import { PaginationContainer } from '@/components/Pagination';
+import { EventCardSkeleton } from './EventCardSkeleton';
 
 interface EventListProps {
   className?: string;
@@ -14,10 +15,11 @@ export function EventList({ className = '' }: EventListProps) {
 
   if (loading) {
     return (
-      <div className={`flex items-center justify-center py-12 ${className}`}>
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Đang tải sự kiện...</p>
+      <div className={`${className}`}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, idx) => (
+            <EventCardSkeleton key={idx} />
+          ))}
         </div>
       </div>
     );
@@ -65,7 +67,7 @@ export function EventList({ className = '' }: EventListProps) {
       {/* Results Summary */}
       <div className="mb-6">
         <p className="text-sm text-gray-600">
-          Hiển thị {filteredEvents.length} trong tổng số {pagination.totalItems} sự kiện
+          Hiển thị {filteredEvents.length} kết quả
           {pagination.totalItems > pagination.pageSize && (
             <span> (Trang {pagination.currentPage} / {Math.ceil(pagination.totalItems / pagination.pageSize)})</span>
           )}
