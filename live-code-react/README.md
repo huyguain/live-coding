@@ -431,3 +431,27 @@ mkdir -p src/components/EventList src/components/SearchBar src/components/Filter
    - Search events và xem pagination
    - Pagination update theo search results
    - Clear search để xem lại tất cả events
+
+### Exam Mode: Search-Only (tối giản để luyện thi)
+
+Đã tạo route tối giản để luyện live-code phần Search + Suggestion, bỏ tất cả tính năng phụ.
+
+- Đường dẫn: `/exam`
+- Tính năng:
+  - Debounced search (300ms)
+  - Search suggestions: Events + Categories
+  - Không có Redux/filters/sort/pagination
+- Files chính:
+  - `src/app/exam/page.tsx`
+  - Tái sử dụng `src/components/SearchBar/SearchResults.tsx`
+  - Data: `getAllMockEvents()` từ `src/data/mockEvents.ts`
+
+Cách dùng:
+1) Chạy dự án ở đúng thư mục:
+```bash
+cd live-code-react
+npm i
+npm run dev
+```
+2) Mở `http://localhost:3000/exam`
+3) Gõ từ khóa, thấy suggestion hiển thị (có debounce). Không cần thực hiện các chức năng khác.
