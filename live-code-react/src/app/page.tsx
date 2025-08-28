@@ -5,6 +5,7 @@ import { FilterPanel, FilterChips } from '@/components/FilterPanel';
 import { SortControl } from '@/components/SortControl';
 import { EventList } from '@/components/EventList';
 import { ReduxDevTools } from '@/components/ReduxDevTools';
+import { PaginationDebug } from '@/components/Pagination/PaginationDebug';
 
 export default function Home() {
   return (
@@ -47,6 +48,9 @@ export default function Home() {
 
       {/* Redux DevTools (Development only) */}
       <ReduxDevTools />
+      
+      {/* Pagination Debug */}
+      <PaginationDebug />
     </div>
   );
 }

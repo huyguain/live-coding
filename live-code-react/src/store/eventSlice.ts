@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Event, EventFilters, EventSort, PaginationState, EventListState } from '@/types/event';
 import { DEFAULT_FILTERS, DEFAULT_SORT, DEFAULT_PAGINATION } from '@/utils/constants';
-import { getMockEvents } from '@/data/mockEvents';
+import { getAllMockEvents } from '@/data/mockEvents';
 
 const initialState: EventListState = {
-  events: getMockEvents(),
-  filteredEvents: getMockEvents(),
+  events: getAllMockEvents(),
+  filteredEvents: getAllMockEvents(),
   filters: DEFAULT_FILTERS,
   sort: DEFAULT_SORT,
   pagination: DEFAULT_PAGINATION,

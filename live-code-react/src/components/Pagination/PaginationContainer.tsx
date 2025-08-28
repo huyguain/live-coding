@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Pagination } from './Pagination';
 import { InfiniteScroll } from './InfiniteScroll';
 import { PaginationToggle } from './PaginationToggle';
+import { useEventData, PaginationMode } from '@/hooks/useEventData';
 
 interface PaginationContainerProps {
   className?: string;
@@ -11,10 +12,13 @@ interface PaginationContainerProps {
 }
 
 export function PaginationContainer({ className = '', showToggle = true }: PaginationContainerProps) {
-  const [mode, setMode] = useState<'pagination' | 'infinite'>('pagination');
+  const [mode, setMode] = useState<PaginationMode>('pagination');
+  const eventData = useEventData(mode);
 
-  const handleModeChange = (newMode: 'pagination' | 'infinite') => {
+  const handleModeChange = (newMode: PaginationMode) => {
     setMode(newMode);
+    // Reset to first page when switching modes
+    eventData.setCurrentPage(1);
   };
 
   return (

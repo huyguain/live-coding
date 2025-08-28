@@ -38,7 +38,7 @@ export const useEvents = () => {
   };
 
   // Get total pages
-  const totalPages = Math.ceil(pagination.totalItems / pagination.pageSize);
+  const totalPages = Math.ceil(filteredEvents.length / pagination.pageSize);
 
   return {
     // State
@@ -58,7 +58,7 @@ export const useEvents = () => {
     setCity: (city: string) => dispatch(setCityFilter(city)),
     setPriceRange: (range: { min: number; max: number }) => dispatch(setPriceRangeFilter(range)),
     setDateRange: (range: { from: string; to: string }) => dispatch(setDateRangeFilter(range)),
-    setSort: (sort: typeof sort) => dispatch(setSort(sort)),
+    setSort: (newSort: typeof sort) => dispatch(setSort(newSort)),
     setCurrentPage: (page: number) => dispatch(setCurrentPage(page)),
     setPageSize: (size: number) => dispatch(setPageSize(size)),
     resetFilters: () => dispatch(resetFilters()),

@@ -375,6 +375,59 @@ mkdir -p src/components/EventList src/components/SearchBar src/components/Filter
 **Infinite Scroll Flow:**
 1. User scroll đến cuối danh sách
 2. Intersection Observer detect
-3. Auto-load thêm events
-4. Progress bar update
-5. Loading indicator hiển thị
+3. Auto-load thêm events với loadMore function
+4. Progress bar update theo số events đã load
+5. Loading indicator hiển thị khi đang tải
+6. End of content khi tải xong tất cả events
+
+**LoadMore Implementation:**
+- **Intersection Observer** - Detect khi user scroll đến cuối
+- **Auto Load** - Tự động gọi loadMore khi cần
+- **Progress Tracking** - Hiển thị tiến độ tải (0% -> 100%)
+- **State Management** - Quản lý displayed events và hasMore state
+- **Filter Integration** - LoadMore hoạt động với tất cả filters
+
+### Bước 15: Thêm Data Sự Kiện Để Test Pagination
+Đã thêm nhiều data sự kiện để test pagination và infinite scroll hiệu quả:
+
+**Data đã thêm:**
+- **Base Events:** 25 events với thông tin chi tiết và đa dạng
+- **Generated Events:** 75 events được tạo động (tổng 100 events)
+- **Categories:** 10 danh mục đa dạng (music, sports, technology, business, education, entertainment, food, art, health, other)
+- **Cities:** 10 thành phố lớn (Hà Nội, TP.HCM, Đà Nẵng, Cần Thơ, Nha Trang, Huế, Vũng Tàu, Đà Lạt, Phú Quốc, Hạ Long)
+- **Price Ranges:** Từ miễn phí đến 2M+ VND
+- **Dates:** Phân bố đều trong năm 2024
+
+**Functions mới:**
+- `generateAdditionalEvents(count)` - Tạo events động với data ngẫu nhiên
+- `getAllMockEvents()` - Lấy tất cả events (base + generated)
+- **Event Properties:** title, description, date, time, location, category, price, image, organizer, tags, capacity, registeredCount, isFeatured
+
+**Page Size Options:**
+- **Small:** 10, 20 events/trang (cho mobile)
+- **Medium:** 50 events/trang (cho tablet)
+- **Large:** 100, 200 events/trang (cho desktop)
+
+**Test Scenarios:**
+1. **Pagination Mode:**
+   - Test với page size 10: 10 trang
+   - Test với page size 20: 5 trang  
+   - Test với page size 50: 2 trang
+   - Test với page size 100: 1 trang
+   - Test với page size 200: 1 trang
+
+2. **Infinite Scroll Mode:**
+   - Scroll để load thêm events
+   - Progress bar update theo số events đã load
+   - Loading indicator khi đang tải
+   - End of content khi tải xong tất cả
+
+3. **Filtering + Pagination:**
+   - Apply filters để giảm số events
+   - Pagination tự động update theo filtered results
+   - Reset pagination khi thay đổi filters
+
+4. **Search + Pagination:**
+   - Search events và xem pagination
+   - Pagination update theo search results
+   - Clear search để xem lại tất cả events
